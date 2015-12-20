@@ -1,0 +1,19 @@
+Metadata-Version: 1.1
+Name: senmolib
+Version: 0.0.1
+Summary: Processing Lib Component of Senmo
+Home-page: https://github.com/
+Author: Benjamin Ghaemmaghami
+Author-email: benghaem@gmail.com
+License: MIT
+Description: long
+Keywords: sensor monitoring,data pipelines
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4

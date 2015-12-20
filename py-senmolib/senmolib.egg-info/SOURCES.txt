@@ -1,0 +1,6 @@
+senmolib/__init__.py
+senmolib.egg-info/PKG-INFO
+senmolib.egg-info/SOURCES.txt
+senmolib.egg-info/dependency_links.txt
+senmolib.egg-info/requires.txt
+senmolib.egg-info/top_level.txt
