@@ -1,4 +1,4 @@
-#! /bin/python
+#! /home/ben/programming/senmo/env/bin/python
 
 from senmolib.components.fusion import Fusion
 import numpy as np

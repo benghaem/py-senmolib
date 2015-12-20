@@ -1,4 +1,4 @@
-#! /bin/python
+#! /home/ben/programming/senmo/env/bin/python
 
 from senmolib.components.worker import Worker
 import numpy as np
@@ -11,7 +11,6 @@ class exampleEcgWorker(Worker):
 		print(self.identity,"have x,y",x_vals[0],y_vals[0])
 
 		#threshold
-		# th = 1.5*np.std(y_vals)
 		th = 1
 
 		data_der = np.ediff1d(y_vals)

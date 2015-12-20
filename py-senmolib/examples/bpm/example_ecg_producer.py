@@ -1,4 +1,4 @@
-#! /bin/python
+#! /home/ben/programming/senmo/env/bin/python
 
 
 # Python server implimentation
@@ -14,6 +14,9 @@ context = zmq.Context()
 socket = context.socket(zmq.PUB)
 socket.bind("tcp://*:5000")
 
+
+file_loop = []
+
 print("Bound to 5000")
 
 with open('ecg_old.csv', 'r') as f:
@@ -22,12 +25,21 @@ with open('ecg_old.csv', 'r') as f:
 	_ = f.readline()
 
 	count = 0
-	while True:
+	for line in f:
 
-		time, y_val = f.readline().split(',')
+		time, y_val = line.split(',')
+
 
 		full_tuple = (count,float(y_val))
+
+		file_loop.append(float(y_val))
 
 		socket.send(msgpack.packb(full_tuple))
 		sleep(0.01)
 		count = count + 1
+
+	while True:
+		for val in file_loop:
+			socket.send(msgpack.packb((count,val)))
+			sleep(0.01)
+			count = count + 1

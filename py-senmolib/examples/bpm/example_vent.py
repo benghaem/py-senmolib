@@ -1,4 +1,4 @@
-#! /bin/python
+#! /home/ben/programming/senmo/env/bin/python
 
 import senmolib
 

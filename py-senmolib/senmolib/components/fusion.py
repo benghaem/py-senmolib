@@ -19,9 +19,7 @@ class Fusion(Base):
 
 	def start(self):
 		# eat start message from vent
-		print("waiting for snack from the vent on", self.fusion_port)
 		self.receiver.recv()
-		print("ate the snack from the vent")
 		while self.running:
 			data = self.decode(self.receiver.recv())
 			fusion_data = self.push_to_buffer(data)
