@@ -2,13 +2,15 @@ from .base import Base
 import zmq
 
 class Fusion(Base):
-	"""
-	A class that may be subclassed to implement a senmo fusion component. 
-	By default this component will wait for its buffer to fill before running the fuse() method
+	"""A class that may be subclassed to implement a senmo fusion component. By default this component will wait for its buffer to fill before running the fuse() method
 
-	Attributes:
-        buffer_size: An int indicating the size of the internal buffer
-        no_dupl: A boolean indicating if the buffer should ignore duplicates
+	Args:
+		buffer_size: An int indicating the size of the internal buffer
+		no_dupl: A boolean indicating if the buffer should ignore duplicates
+
+	Note:
+		fuse() should be redefined by all subclasses as the reference implementation does nothing
+
 	"""
 
 	def __init__(self, buffer_size, no_dupl):
@@ -27,11 +29,9 @@ class Fusion(Base):
 
 	def start(self):
 		"""
-		Starts the component
-	
-		Args:
-			self: context
+		Start the component.
 
+		Decodes data from the receiver socket and then calls push_to_buffer. If push_to_buffer returns data, the data is then encoded and sent.
 		"""
 
 		# eat start message from vent
@@ -43,6 +43,15 @@ class Fusion(Base):
 				self.sender.send(self.encode(fusion_data))
 
 	def push_to_buffer(self, data):
+		"""
+		Pushes data into internal buffer and runs fuse() if the buffer is full.
+
+		Args:
+			data: a list of items to add to the buffer
+
+		Returns:
+			object: the result of fuse() on the buffer if the buffer was full
+		"""
 		result = None
 		if not self.no_dupl:
 			self.buffer += data
@@ -58,4 +67,14 @@ class Fusion(Base):
 		return result
 
 	def fuse(self, data):
+		"""
+		Fuses an list of data. #The reference implementation of this function does nothing# and thus it should be redefined when subclassed
+
+		Args:
+			data: A list of data from the internal buffer
+
+		Returns:
+			object: Data in some format to be serialized by msgpack
+
+		"""
 		return data
