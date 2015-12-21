@@ -1,2 +1,2 @@
-# senmo-process
+# senmolib
 Processing Component of Senmo System
