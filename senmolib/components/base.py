@@ -3,7 +3,12 @@ import argparse
 import msgpack
 
 class Base(object):
-	"""Class to provide common CLI argument requrirements and provide basic implimentation of encode and decode using msgpack"""
+	"""Class to provide common CLI argument requrirements and provide basic implimentation of encode and decode using msgpack
+
+	Args:
+		verbose: A boolean. If true the component may print debug info to the console
+
+	"""
 
 	def __init__(self, verbose=False):
 		super(Base, self).__init__()
@@ -35,7 +40,7 @@ class Base(object):
 
 		Args:
 			data_in: bytes object from socket
-			allow_stop: a boolean value that if set to true will allow the component to be stopped by passing
+			allow_stop: a boolean value that if set to true will allow the component to be stopped by passing ['senmo-stop']
 
 		Returns:
 			An object or None
