@@ -1,2 +1,7 @@
 ecg_old.csv
-docs/build/*
+docs/build/
+
+__pycache__/
+*.py[cod]
+
+*.egg-info
