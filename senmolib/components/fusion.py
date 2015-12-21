@@ -2,6 +2,14 @@ from .base import Base
 import zmq
 
 class Fusion(Base):
+	"""
+	A class that may be subclassed to implement a senmo fusion component. 
+	By default this component will wait for its buffer to fill before running the fuse() method
+
+	Attributes:
+        buffer_size: An int indicating the size of the internal buffer
+        no_dupl: A boolean indicating if the buffer should ignore duplicates
+	"""
 
 	def __init__(self, buffer_size, no_dupl):
 		super(Fusion, self).__init__()
@@ -18,6 +26,14 @@ class Fusion(Base):
 		self.sender.bind("tcp://*:"+str(self.output_port))
 
 	def start(self):
+		"""
+		Starts the component
+	
+		Args:
+			self: context
+
+		"""
+
 		# eat start message from vent
 		self.receiver.recv()
 		while self.running:

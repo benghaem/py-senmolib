@@ -3,6 +3,7 @@ import argparse
 import msgpack
 
 class Base(object):
+	"""Class to provide common CLI argument requrirements and provide basic implimentation of encode and decode using msgpack"""
 
 	def __init__(self, verbose=False):
 		super(Base, self).__init__()
@@ -25,16 +26,38 @@ class Base(object):
 		self.output_port = args.output_port
 
 	def start(self):
+		"""Start the component. Must be implimented by subclass"""
 		raise NotImplementedError
 
-	def decode(self, data_in):
+	def decode(self, data_in, allow_stop=True):
+		"""
+		Decode byte input using msgpack
+
+		Args:
+			data_in: bytes object from socket
+			allow_stop: a boolean value that if set to true will allow the component to be stopped by passing
+
+		Returns:
+			An object or None
+
+		"""
 		data = msgpack.unpackb(data_in, use_list=False)
-		if data != ['senmo-stop']:
-			return data
-		else:
+		# Check for stop condition and return none if stopped
+		if data == ['senmo-stop'] and allow_stop:
 			self.running = False
 			return None
+		return data
+
 
 	def encode(self, data):
+		"""
+		Encode object input using msgpack
+
+		Args:
+			data: an object to encode with msgpack
+
+		Returns:
+			A bytes object
+		"""
 		return msgpack.packb(data)
 	
