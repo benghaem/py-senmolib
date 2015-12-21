@@ -48,3 +48,9 @@ More examples are available in the examples folder of the repo
 
 .. autoclass:: Fusion
    :members:
+
+:class:`Monitor`
+----------------
+
+.. autoclass:: Monitor
+	:members:
