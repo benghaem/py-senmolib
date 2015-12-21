@@ -13,8 +13,8 @@ class Fusion(Base):
 
 	"""
 
-	def __init__(self, buffer_size, no_dupl):
-		super(Fusion, self).__init__()
+	def __init__(self, buffer_size, no_dupl, **kwargs):
+		super(Fusion, self).__init__(**kwargs)
 		self.buffer = []
 		self.no_dupl = no_dupl
 		self.buffer_size = buffer_size

@@ -2,8 +2,8 @@ from .base import Base
 import zmq
 
 class Worker(Base):
-	def __init__(self, verbose=False):
-		super(Worker, self).__init__()
+	def __init__(self, **kwargs):
+		super(Worker, self).__init__(**kwargs)
 		# Socket to receive messages on
 		self.receiver = self.context.socket(zmq.PULL)
 		self.receiver.connect("tcp://localhost:"+str(self.worker_port))
@@ -13,7 +13,7 @@ class Worker(Base):
 		self.sender.connect("tcp://localhost:"+str(self.fusion_port))
 
 	def start(self):
-		while self.running: 
+		while self.running:
 			data = self.decode(self.receiver.recv())
 			output = self.process(data)
 			self.sender.send(self.encode(output))

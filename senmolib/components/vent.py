@@ -4,8 +4,8 @@ import msgpack
 import time
 
 class Vent(Base):
-	def __init__(self, window_size, window_offset, verbose=False):
-		super(Vent, self).__init__()
+	def __init__(self, window_size, window_offset, **kwargs):
+		super(Vent, self).__init__(**kwargs)
 		self.buffer = []
 		self.buffer_max = window_size
 		self.window_offset = window_offset
