@@ -4,6 +4,14 @@ import msgpack
 import time
 
 class Vent(Base):
+	"""
+	A class that defines a senmo vent component. The ventilator sends windows of the input stream off to worker components.
+
+	Args:
+		window_size: An int, number of values from the data stream to buffer before sending to a worker
+		window_offset: An int, the number of new values required before sending another window
+	"""
+
 	def __init__(self, window_size, window_offset, **kwargs):
 		super(Vent, self).__init__(**kwargs)
 		self.buffer = []
@@ -23,6 +31,11 @@ class Vent(Base):
 		self.fusion.connect("tcp://localhost:"+str(self.fusion_port))
 
 	def start(self):
+		"""
+		Start the ventilator
+
+		Sends a message to the fusion component to ensure that it is active before buffering input and sending complete windows to the workers
+		"""
 		waiting = True
 		while waiting:
 			try:
@@ -39,6 +52,16 @@ class Vent(Base):
 					self.sender.send(self.encode(window))
 	
 	def update_buffer(self, data):
+		"""
+		Pushes data to the buffer
+
+		Args:
+			data: a python object to add to the buffer
+
+		Returns:
+			list: a list of python objects of length 'window_size'
+
+		"""
 		windows = []
 		self.buffer.append(data)
 

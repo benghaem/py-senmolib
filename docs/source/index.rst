@@ -9,7 +9,6 @@ Welcome to senmolib's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 4
 
    api/index
 
